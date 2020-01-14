@@ -12,9 +12,9 @@ module.exports = ({ markdownAST }, pluginOptions) => {
     if (!RE_RENDER_AS_MARKMAP.test(lines.shift())) return;
     const content = lines.join('\n');
     const data = transform(parse(content));
-    const svgId = `markmap-${++id}`;
+    const elId = `markmap-${++id}`;
     node.type = 'html';
-    node.value = `<div class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"><svg id="${svgId}"></svg></div>`;
+    node.value = `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"><svg></svg></div>`;
   });
   return markdownAST;
 };
