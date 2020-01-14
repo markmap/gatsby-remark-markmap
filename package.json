@@ -8,5 +8,11 @@
     "markmap": "^0.6.1",
     "unist-util-visit": "^2.0.1"
   },
-  "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git"
+  "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "markdown",
+    "markmap"
+  ]
 }
