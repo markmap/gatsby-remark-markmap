@@ -1,6 +1,6 @@
 # gatsby-remark-markmap
 
-Visualize code blocks in Markdown files as mindmaps, using [markmap](https://github.com/dundalek/markmap).
+Visualize code blocks in Markdown files using [markmap](https://github.com/dundalek/markmap).
 
 ## Demo
 
@@ -27,7 +27,7 @@ Render Markdown as mindmap:
 
 Output:
 
-![markmap](https://user-images.githubusercontent.com/3139113/72319163-6d6ec300-36d9-11ea-99f0-395cb655cb00.png)
+<img alt="markmap" src="https://user-images.githubusercontent.com/3139113/72319163-6d6ec300-36d9-11ea-99f0-395cb655cb00.png" width="400">
 
 ## Installation
 
@@ -54,3 +54,13 @@ plugins: [
   },
 ]
 ```
+
+Add a comment at the beginning of your Markdown code block:
+
+````markdown
+```markdown
+<!-- render-as-markmap -->
+
+put your Markdown here
+```
+````
