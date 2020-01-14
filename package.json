@@ -1,0 +1,12 @@
+{
+  "name": "gatsby-remark-markmap",
+  "version": "0.0.0",
+  "author": "Gerald <i@gerald.top>",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "markmap": "^0.6.1",
+    "unist-util-visit": "^2.0.1"
+  },
+  "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git"
+}
