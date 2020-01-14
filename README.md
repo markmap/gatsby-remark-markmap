@@ -77,3 +77,8 @@ Add a comment at the beginning of your Markdown code block:
 put your Markdown here
 ```
 ````
+
+## Related
+
+- [coc-markmap](https://github.com/gera2ld/coc-markmap) - Vim / NeoVim plugin powered by [coc.nvim](https://github.com/neoclide/coc.nvim)
+- [markmap-cli](https://github.com/gera2ld/markmap-cli) - Standalone command line version
