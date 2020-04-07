@@ -1,6 +1,5 @@
 const visit = require('unist-util-visit');
-const parse = require('markmap/lib/parse.markdown');
-const transform = require('markmap/lib/transform.headings');
+const { transform } = require('markmap-lib/dist/transform.common');
 
 const RE_RENDER_AS_MARKMAP = /<!--\s*render-as-markmap\s*-->/;
 
@@ -11,7 +10,7 @@ module.exports = ({ markdownAST }, pluginOptions) => {
     const lines = node.value.split('\n');
     if (!RE_RENDER_AS_MARKMAP.test(lines.shift())) return;
     const content = lines.join('\n');
-    const data = transform(parse(content));
+    const data = transform(content);
     const elId = `markmap-${++id}`;
     node.type = 'html';
     node.value = `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"><svg></svg></div>`;
