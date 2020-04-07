@@ -2,18 +2,28 @@ const visit = require('unist-util-visit');
 const { transform } = require('markmap-lib/dist/transform.common');
 
 const RE_RENDER_AS_MARKMAP = /<!--\s*render-as-markmap\s*-->/;
+let id = 0;
+
+function createMarkmap(content) {
+  const data = transform(content);
+  const elId = `markmap-${++id}`;
+  return `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"><svg></svg></div>`;
+}
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  let id = 0;
   visit(markdownAST, 'code', node => {
-    if (node.lang !== 'markdown') return;
-    const lines = node.value.split('\n');
-    if (!RE_RENDER_AS_MARKMAP.test(lines.shift())) return;
-    const content = lines.join('\n');
-    const data = transform(content);
-    const elId = `markmap-${++id}`;
+    let content;
+    if (node.lang === 'markmap') {
+      content = node.value;
+    } else if (node.lang === 'markdown') {
+      const lines = node.value.split('\n');
+      if (!RE_RENDER_AS_MARKMAP.test(lines.shift())) return;
+      content = lines.join('\n');
+    } else {
+      return;
+    }
     node.type = 'html';
-    node.value = `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"><svg></svg></div>`;
+    node.value = createMarkmap(content);
   });
   return markdownAST;
 };

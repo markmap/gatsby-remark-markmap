@@ -1,6 +1,6 @@
 # gatsby-remark-markmap
 
-Visualize code blocks in Markdown files using [markmap](https://github.com/dundalek/markmap).
+Visualize code blocks in Markdown files using [markmap-lib](https://github.com/gera2ld/markmap-lib).
 
 ## Demo
 
@@ -9,9 +9,7 @@ Input:
 ````markdown
 Render Markdown as mindmap:
 
-```markdown
-<!-- render-as-markmap -->
-
+```markmap
 # Food
 ## Fruits
 - easy to eat
@@ -47,16 +45,7 @@ plugins: [
       plugins: [
         // Note that `gatsby-remark-markmap` must be put before other plugins
         // that handle code blocks, e.g. `gatsby-remark-prismjs`
-        {
-          resolve: 'gatsby-remark-markmap',
-          options: {
-            // Pass options to markmap here
-            markmap: {
-              nodeFont: '12px sans-serif',
-              nodeHeight: 16,
-            },
-          },
-        },
+        'gatsby-remark-markmap',
         'gatsby-remark-prismjs',
       ],
     },
@@ -64,21 +53,20 @@ plugins: [
 ]
 ```
 
-Additional options can be passed to [markmap](https://github.com/dundalek/markmap) by `options.markmap`.
+Additional options can be passed to [markmap-lib](https://github.com/gera2ld/markmap-lib) by `options.markmap`.
 
-**Note:** if `nodeFont` is changed, you will also need to update `font` of `.gatsby-markmap` in your CSS, because `nodeFont` is used to measure size of texts, but not to affect how they look in the page.
-
-Add a comment at the beginning of your Markdown code block:
+Code blocks with a language of `markmap` will be transformed into interactive markmaps. You can also prepend a comment to leverage Markdown syntax highlight:
 
 ````markdown
 ```markdown
 <!-- render-as-markmap -->
 
-put your Markdown here
+# markmap
+## contents
 ```
 ````
 
 ## Related
 
 - [coc-markmap](https://github.com/gera2ld/coc-markmap) - Vim / NeoVim plugin powered by [coc.nvim](https://github.com/neoclide/coc.nvim)
-- [markmap-cli](https://github.com/gera2ld/markmap-cli) - Standalone command line version
+- [markmap-lib](https://github.com/gera2ld/markmap-lib) - Standalone command line version
