@@ -53,7 +53,32 @@ plugins: [
 ]
 ```
 
-Additional options can be passed to [markmap-lib](https://github.com/gera2ld/markmap-lib) by `options.markmap`.
+### Options
+
+- `options.markmap`, default as `{}`
+
+  Passed to [markmap-lib](https://github.com/gera2ld/markmap-lib).
+
+- `options.plugins`, default as `[]`
+
+  An array of extension features to be enabled for markmap. Current available plugins are:
+
+  - `mathJax`: transform MathJax syntax
+  - `prism`: highlight code blocks with PrismJS
+
+Here is an example using options:
+
+```js
+{
+  resolve: 'gatsby-remark-markmap',
+  options: {
+    markmap: {/* markmap options */},
+    plugins: ['mathJax', 'prism'],
+  },
+},
+```
+
+### Code
 
 Code blocks with a language of `markmap` will be transformed into interactive markmaps. You can also prepend a comment to leverage Markdown syntax highlight:
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "markmap-lib": "^0.4.1",
+    "markmap-lib": "^0.7.3",
     "unist-util-visit": "^2.0.1"
   },
   "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git",

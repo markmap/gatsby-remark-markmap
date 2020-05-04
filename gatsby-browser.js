@@ -1,9 +1,24 @@
-const { markmap } = require('markmap-lib/dist/view.common');
+const d3 = require('d3');
+const { markmap, loadPlugins } = require('markmap-lib/dist/view');
+
+const defaultOptions = {
+  plugins: [],
+};
+
+let initialize = (options) => {
+  initialize = () => {};
+  const { plugins } = {
+    ...defaultOptions,
+    ...options,
+  };
+  if (plugins?.length) loadPlugins(plugins);
+};
 
 exports.onRouteUpdate = (context, pluginOptions) => {
   const markmaps = Array.from(document.querySelectorAll('.gatsby-markmap'));
+  if (markmaps.length) initialize(pluginOptions);
   markmaps.forEach(wrapper => {
-    const svg = wrapper.querySelector('svg');
+    const svg = d3.select(wrapper).append('svg');
     try {
       const data = JSON.parse(wrapper.dataset.markmap);
       markmap(svg, data, pluginOptions.markmap);
