@@ -55,6 +55,10 @@ plugins: [
 
 ### Options
 
+- `options.loadDeps`
+
+  A function to load dependencies before creating markmaps. By default it loads `d3@5` from [jsdelivr.com](https://www.jsdelivr.com/).
+
 - `options.markmap`, default as `{}`
 
   Passed to [markmap-lib](https://github.com/gera2ld/markmap-lib).
