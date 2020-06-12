@@ -1,3 +1,5 @@
+import './style.css';
+
 function loadScript(url) {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
@@ -37,7 +39,7 @@ function initialize(options) {
   return loading;
 }
 
-exports.onRouteUpdate = (context, pluginOptions) => {
+export function onRouteUpdate(context, pluginOptions) {
   const markmaps = Array.from(document.querySelectorAll('.gatsby-markmap'));
   if (markmaps.length) {
     initialize(pluginOptions)
@@ -54,4 +56,4 @@ exports.onRouteUpdate = (context, pluginOptions) => {
         });
       });
   }
-};
+}
