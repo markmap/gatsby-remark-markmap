@@ -20,7 +20,7 @@ function createMarkmap(content) {
   return `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"></div>`;
 }
 
-export default function plugin({ markdownAST }, pluginOptions) {
+module.exports = ({ markdownAST }, pluginOptions) => {
   visit(markdownAST, 'code', node => {
     let content;
     if (node.lang === 'markmap') {
@@ -36,4 +36,4 @@ export default function plugin({ markdownAST }, pluginOptions) {
     node.value = createMarkmap(content);
   });
   return markdownAST;
-}
+};
