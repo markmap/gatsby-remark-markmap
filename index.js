@@ -1,5 +1,7 @@
 const visit = require('unist-util-visit');
-const { transform } = require('markmap-lib/dist/transform');
+const { Transformer } = require('markmap-lib');
+
+const transformer = new Transformer();
 
 const RE_RENDER_AS_MARKMAP = /<!--\s*render-as-markmap\s*-->/;
 let id = 0;
@@ -15,9 +17,9 @@ function encodeAttr(str) {
 }
 
 function createMarkmap(content) {
-  const data = transform(content);
+  const { root } = transformer.transform(content);
   const elId = `markmap-${++id}`;
-  return `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(data))}"></div>`;
+  return `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(root))}"></div>`;
 }
 
 module.exports = ({ markdownAST }, pluginOptions) => {
