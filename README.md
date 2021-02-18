@@ -55,20 +55,9 @@ plugins: [
 
 ### Options
 
-- `options.loadDeps`
-
-  A function to load dependencies before creating markmaps. By default it loads `d3@5` from [jsdelivr.com](https://www.jsdelivr.com/).
-
 - `options.markmap`, default as `{}`
 
   Passed to [markmap-lib](https://github.com/gera2ld/markmap-lib).
-
-- `options.plugins`, default as `[]`
-
-  An array of extension features to be enabled for markmap. Current available plugins are:
-
-  - `mathJax`: transform MathJax syntax
-  - `prism`: highlight code blocks with PrismJS
 
 Here is an example using options:
 
@@ -77,7 +66,6 @@ Here is an example using options:
   resolve: 'gatsby-remark-markmap',
   options: {
     markmap: {/* markmap options */},
-    plugins: ['mathJax', 'prism'],
   },
 },
 ```
