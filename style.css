@@ -1,4 +1,7 @@
 .gatsby-markmap > svg {
   width: 100%;
   height: 300px;
+
+  // Can be removed in next release of markmap
+  line-height: 1;
 }
