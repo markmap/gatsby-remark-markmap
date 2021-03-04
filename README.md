@@ -1,6 +1,6 @@
 # gatsby-remark-markmap
 
-Visualize code blocks in Markdown files using [markmap-lib](https://github.com/gera2ld/markmap-lib).
+Visualize code blocks in Markdown files using [markmap](https://github.com/gera2ld/markmap).
 
 ## Demo
 
@@ -57,7 +57,7 @@ plugins: [
 
 - `options.markmap`, default as `{}`
 
-  Passed to [markmap-lib](https://github.com/gera2ld/markmap-lib).
+  Passed to [markmap-view](https://github.com/gera2ld/markmap/tree/master/packages/markmap-view).
 
 Here is an example using options:
 
@@ -85,5 +85,4 @@ Code blocks with a language of `markmap` will be transformed into interactive ma
 
 ## Related
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap) - Vim / NeoVim plugin powered by [coc.nvim](https://github.com/neoclide/coc.nvim)
-- [markmap-lib](https://github.com/gera2ld/markmap-lib) - Standalone command line version
+- [markmap](https://github.com/gera2ld/markmap) - markmap core packages
