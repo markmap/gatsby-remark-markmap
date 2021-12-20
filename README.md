@@ -9,7 +9,7 @@ Input:
 ````markdown
 Render Markdown as mindmap:
 
-```markmap
+```markdown markmap
 # Food
 ## Fruits
 - easy to eat
@@ -29,7 +29,7 @@ Output:
 
 ## Installation
 
-```sh
+```bash
 $ yarn add gatsby-remark-markmap
 ```
 
@@ -72,12 +72,10 @@ Here is an example using options:
 
 ### Code
 
-Code blocks with a language of `markmap` will be transformed into interactive markmaps. You can also prepend a comment to leverage Markdown syntax highlight:
+Code blocks with language of `markdown` and meta of `markmap` will be transformed into interactive markmaps.
 
 ````markdown
-```markdown
-<!-- render-as-markmap -->
-
+```markdown markmap
 # markmap
 ## contents
 ```

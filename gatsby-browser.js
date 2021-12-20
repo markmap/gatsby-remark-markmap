@@ -2,7 +2,7 @@ import debounce from 'lodash.debounce';
 import { loadCSS, loadJS } from 'markmap-common';
 import './style.css';
 
-const assets = loadMeta('assets');
+const assets = process.env.MARKMAP_ASSETS;
 let loading;
 let loaded = [];
 
@@ -12,19 +12,6 @@ window.addEventListener('resize', debounce(() => {
     mm.fit();
   });
 }, 200));
-
-function loadMeta(key) {
-  let data;
-  const meta = document.querySelector(`meta[name="markmap:${key}"]`);
-  if (meta) {
-    try {
-      data = JSON.parse(meta.content);
-    } catch {
-      // noop
-    }
-  }
-  return data;
-}
 
 function autoload() {
   if (!loading) {
@@ -46,6 +33,17 @@ function autoload() {
   return loading;
 }
 
+function base64decode(base64) {
+  const bin = window.atob(base64);
+  const len = bin.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i += 1) {
+    bytes[i] = bin.charCodeAt(i);
+  }
+  const decoder = new TextDecoder();
+  return decoder.decode(bytes);
+}
+
 export function onRouteUpdate(context, pluginOptions) {
   loaded = loaded.filter(mm => {
     if (!document.body.contains(mm.svg.node())) {
@@ -62,7 +60,8 @@ export function onRouteUpdate(context, pluginOptions) {
         if (wrapper.childNodes.length) return;
         const svg = d3.select(wrapper).append('svg');
         try {
-          const data = JSON.parse(wrapper.dataset.markmap);
+          const raw = wrapper.dataset.markmap;
+          const data = JSON.parse(base64decode(raw));
           const mm = markmap.Markmap.create(svg, pluginOptions.markmap, data);
           loaded.push(mm);
         } catch (err) {

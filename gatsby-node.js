@@ -1,11 +1,9 @@
-const React = require('react');
 const { Transformer } = require('markmap-lib');
 const { escapeScript, buildCode } = require('markmap-common');
 
 const transformer = new Transformer();
-const assets = transformer.getAssets();
-const { scripts, styles } = assets;
-const assetsText = JSON.stringify({
+const { scripts, styles } = transformer.getAssets();
+const assets = {
   scripts: scripts?.map(item => {
     if (item.type === 'script') return item;
     const { fn, getParams } = item.data;
@@ -20,13 +18,15 @@ const assetsText = JSON.stringify({
     };
   }),
   styles,
-});
+};
 
-exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
-  setHeadComponents([
-    React.createElement('meta', {
-      name: 'markmap:assets',
-      content: assetsText,
-    }),
-  ]);
+exports.onCreateWebpackConfig = async ({ actions, plugins }, pluginOptions) => {
+  const mergedAssets = (pluginOptions?.assets || (i => i))(assets);
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        'process.env.MARKMAP_ASSETS': JSON.stringify(mergedAssets),
+      }),
+    ],
+  })
 };

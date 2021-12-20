@@ -3,39 +3,25 @@ const { Transformer } = require('markmap-lib');
 
 const transformer = new Transformer();
 
-const RE_RENDER_AS_MARKMAP = /<!--\s*render-as-markmap\s*-->/;
-let id = 0;
+const getId = (id => () => ++id)(0);
 
-function encodeAttr(str) {
-  const encoded = str.replace(/[<>&"]/g, m => ({
-    '<': '&lt;',
-    '>': '&gt;',
-    '&': '&amp;',
-    '"': '&quot;',
-  }[m]));
-  return encoded;
+function base64encode(str) {
+  return Buffer.from(str).toString('base64');
 }
 
 function createMarkmap(content) {
   const { root } = transformer.transform(content);
-  const elId = `markmap-${++id}`;
-  return `<div id="${elId}" class="gatsby-markmap" data-markmap="${encodeAttr(JSON.stringify(root))}"></div>`;
+  return `<div id="markmap-${getId()}" class="gatsby-markmap" data-markmap="${base64encode(JSON.stringify(root))}"></div>`;
 }
 
 module.exports = ({ markdownAST }, pluginOptions) => {
   visit(markdownAST, 'code', node => {
-    let content;
-    if (node.lang === 'markmap') {
-      content = node.value;
-    } else if (node.lang === 'markdown') {
-      const lines = node.value.split('\n');
-      if (!RE_RENDER_AS_MARKMAP.test(lines.shift())) return;
-      content = lines.join('\n');
+    if (node.lang === 'markmap' || node.lang === 'markdown' && node.meta === 'markmap') {
+      node.type = 'html';
+      node.value = createMarkmap(node.value);
     } else {
       return;
     }
-    node.type = 'html';
-    node.value = createMarkmap(content);
   });
   return markdownAST;
 };
