@@ -55,9 +55,15 @@ plugins: [
 
 ### Options
 
-- `options.markmap`, default as `{}`
+- `options.markmap` *object*
+
+  Defaults as `{}`.
 
   Passed to [markmap-view](https://github.com/gera2ld/markmap/tree/master/packages/markmap-view).
+
+- `options.assets` *(assets: IAssets) => IAssets*
+
+  Change the assets to preload for markmap. If provided, the returned assets will be preloaded.
 
 Here is an example using options:
 
