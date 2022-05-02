@@ -1,5 +1,6 @@
 const { Transformer } = require('markmap-lib');
 const { escapeScript, buildCode } = require('markmap-common');
+const viewVersion = require('markmap-view/package.json').version;
 
 const transformer = new Transformer();
 const { scripts, styles } = transformer.getAssets();
@@ -26,6 +27,7 @@ exports.onCreateWebpackConfig = async ({ actions, plugins }, pluginOptions) => {
     plugins: [
       plugins.define({
         'process.env.MARKMAP_ASSETS': JSON.stringify(mergedAssets),
+        'process.env.MARKMAP_VIEW_VERSION': JSON.stringify(viewVersion),
       }),
     ],
   })

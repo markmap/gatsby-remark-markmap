@@ -2,6 +2,7 @@ import debounce from 'lodash.debounce';
 import { loadCSS, loadJS } from 'markmap-common';
 import './style.css';
 
+const viewVersion = process.env.MARKMAP_VIEW_VERSION;
 const assets = process.env.MARKMAP_ASSETS;
 let loading;
 let loaded = [];
@@ -20,7 +21,7 @@ function autoload() {
       {
         type: 'script',
         data: {
-          src: 'https://cdn.jsdelivr.net/combine/npm/d3@6,npm/markmap-view@0.2',
+          src: `https://cdn.jsdelivr.net/combine/npm/d3@6,npm/markmap-view@${viewVersion}`,
         },
       },
       ...assets?.scripts || [],
