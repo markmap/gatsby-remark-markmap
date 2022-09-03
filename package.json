@@ -6,9 +6,9 @@
   "license": "MIT",
   "dependencies": {
     "lodash.debounce": "^4.0.8",
-    "markmap-common": "^0.14.0",
-    "markmap-lib": "^0.14.1",
-    "markmap-view": "^0.14.0",
+    "markmap-common": "^0.14.2",
+    "markmap-lib": "^0.14.3",
+    "markmap-view": "^0.14.3",
     "unist-util-visit": "^2.0.3"
   },
   "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git",

@@ -34,18 +34,7 @@ function autoload() {
   return loading;
 }
 
-function base64decode(base64) {
-  const bin = window.atob(base64);
-  const len = bin.length;
-  const bytes = new Uint8Array(len);
-  for (let i = 0; i < len; i += 1) {
-    bytes[i] = bin.charCodeAt(i);
-  }
-  const decoder = new TextDecoder();
-  return decoder.decode(bytes);
-}
-
-export function onRouteUpdate(context, pluginOptions) {
+export function onRouteUpdate(_context, pluginOptions) {
   loaded = loaded.filter(mm => {
     if (!document.body.contains(mm.svg.node())) {
       mm.destroy();
@@ -58,12 +47,16 @@ export function onRouteUpdate(context, pluginOptions) {
     autoload().then(() => {
       const { d3, markmap } = window;
       markmaps.forEach(wrapper => {
-        if (wrapper.childNodes.length) return;
-        const svg = d3.select(wrapper).append('svg');
+        if (wrapper.querySelector('svg')) return;
+        const script = wrapper.querySelector('script[type="text/markmap"]');
+        if (!script) return;
         try {
-          const raw = wrapper.dataset.markmap;
-          const data = JSON.parse(base64decode(raw));
-          const mm = markmap.Markmap.create(svg, pluginOptions.markmap, data);
+          const { data, options } = JSON.parse(script.textContent);
+          const svg = d3.select(wrapper).append('svg');
+          const mm = markmap.Markmap.create(svg, markmap.deriveOptions({
+            ...pluginOptions.markmap,
+            ...options,
+          }), data);
           loaded.push(mm);
         } catch (err) {
           console.error(err);

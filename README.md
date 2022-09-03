@@ -57,9 +57,7 @@ plugins: [
 
 - `options.markmap` *object*
 
-  Defaults as `{}`.
-
-  Passed to [markmap-view](https://github.com/gera2ld/markmap/tree/master/packages/markmap-view).
+  JSON options for markmap rendering, see [the documentation](https://markmap.js.org/docs/json-options) for more details.
 
 - `options.assets` *(assets: IAssets) => IAssets*
 
