@@ -11,7 +11,7 @@
     "markmap-view": "^0.14.3",
     "unist-util-visit": "^2.0.3"
   },
-  "repository": "git@github.com:gera2ld/gatsby-remark-markmap.git",
+  "repository": "git@github.com:markmap/gatsby-remark-markmap.git",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
